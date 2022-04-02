@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MonthViewActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -29,14 +29,13 @@
                 android:layout_gravity="left"
                 ></Button>
             <TextView
+                android:id="@+id/nowmonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:text="2022년 4월"
-
                 ></TextView>
             <Button
                 android:id="@+id/after"
@@ -125,7 +124,7 @@
             >
 
             <GridView
-                android:id="@+id/calendar"
+                android:id="@+id/calendarGridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:columnWidth="100dp"
