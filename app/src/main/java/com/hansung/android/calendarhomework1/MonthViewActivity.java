@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -18,7 +19,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
     public static int year = 0;
     public static int month = 0;
-    public static int day = 0;
+    //public static int day = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class MonthViewActivity extends AppCompatActivity {
 
         Calendar c = Calendar.getInstance();
 
+        //이전 액티비티로부터 인텐트 받아오는 코드
         Intent gotintent = getIntent();
-        ///////
         if(gotintent.getIntExtra("nowmonth",0)==0) {
             month = c.get(Calendar.MONTH) + 1;
         }
@@ -48,21 +49,21 @@ public class MonthViewActivity extends AppCompatActivity {
         else {
             year = gotintent.getIntExtra("nowyear", 0);
         }
-        /////////
-        String y = Integer.toString(year);
-        String m = Integer.toString(month);
-        String d = Integer.toString(day);
-        String cday = "";
-        // 데이터 원본 준비
+
+
+        // 달력 표시를 위한 배열 정의와 날짜 계산
         ArrayList<String> items= new ArrayList<String>();
 
+        String cday = "";
         int start_day = getDays(year, month) % 7;
 
         if(start_day!=0) {
             for (int i = 0; i < start_day; i++) {
-                items.add("");
+                cday = "";
+                items.add(cday);
             }
         }
+
         if (month == 2) {
             if (year % 400 == 0) {
                 for (int i = 1; i <= 29; i++) {
@@ -104,11 +105,18 @@ public class MonthViewActivity extends AppCompatActivity {
         // 어댑터를 GridView 객체에 연결
         cal.setAdapter(adapt);
 
-        TextView mon = (TextView) findViewById(R.id.nowmonth);
-        mon.setText(y+"년"+" "+m+"월");
 
+        // 현재 출력 중인 년, 월 정보를 TextView에 전달
+        String y = Integer.toString(year);
+        String m = Integer.toString(month);
+        //String d = Integer.toString(day);
+
+        TextView mon = (TextView) findViewById(R.id.titlenowmonth);
+        mon.setText(y+"년 "+m+"월");
+
+        // 버튼 클릭 이벤트(다음버튼)
         Button btnAfter = findViewById(R.id.after);
-        btnAfter.setOnClickListener(new View.OnClickListener() {
+        btnAfter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 month += 1;
@@ -116,16 +124,19 @@ public class MonthViewActivity extends AppCompatActivity {
                     month = 1;
                     year += 1;
                 }
+                Toast.makeText(getApplicationContext(),
+                        Integer.toString(year)+"년 "+Integer.toString(month)+"월",
+                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MonthViewActivity.class);
                 intent.putExtra("nowmonth", month);
                 intent.putExtra("nowyear", year);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "After Submitted Successfully",
-                        Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });
 
+        // 버튼 클릭 이벤트(이전버튼)
         Button btnBefore = findViewById(R.id.before);
         btnBefore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,17 +146,33 @@ public class MonthViewActivity extends AppCompatActivity {
                     month = 12;
                     year -= 1;
                 }
+                Toast.makeText(getApplicationContext(),
+                        Integer.toString(year)+"년 "+Integer.toString(month)+"월",
+                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MonthViewActivity.class);
                 intent.putExtra("nowmonth", month);
                 intent.putExtra("nowyear", year);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Before Submitted Successfully",
-                        Toast.LENGTH_SHORT).show();
+
                 finish();
+            }
+        });
+
+        // 그리드뷰 클릭 이벤트(달력 그리드뷰)
+        cal.setOnItemClickListener(new GridView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                if(position-start_day<0){
+                }
+                else {
+                    Toast.makeText(MonthViewActivity.this,
+                            y + "." + m + "." + (position - start_day + 1),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
+    // 현재 달의 시작 날짜를 계산하기 위해 총 날짜를 알아내는 함수 정의
     public static int getDays(int year, int month) { // 총 날짜수를 구하는 메소드
         int total = 0;
 
