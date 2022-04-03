@@ -177,11 +177,11 @@ public class MonthViewActivity extends AppCompatActivity {
         int total = 0;
 
         total += (year - 1) * 365;
-        total += (year / 4) - (year / 100) + (year / 400);
+        total += (int)(year / 4) - (int)(year / 100) + (int)(year / 400);
         if (year % 400 == 0) {
             if (month < 3)
                 total -= 1;
-        } else if (year % 4 == 0 || year % 100 != 0) {
+        } else if (year % 4 == 0 && year % 100 != 0) {
             if (month < 3)
                 total -= 1;
         }

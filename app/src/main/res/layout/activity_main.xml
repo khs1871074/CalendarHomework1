@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="이전"
                 android:layout_gravity="left"
+                android:textSize="16sp"
                 ></Button>
             <TextView
                 android:id="@+id/titlenowmonth"
@@ -35,6 +36,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
+                android:textSize="20sp"
                 ></TextView>
             <Button
                 android:id="@+id/after"
@@ -42,11 +44,12 @@
                 android:layout_height="wrap_content"
                 android:text="다음"
                 android:layout_gravity="right"
+                android:textSize="16sp"
                 ></Button>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="1dp"
@@ -56,56 +59,62 @@
 
             <TextView
                 android:id="@+id/sunday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="일"
                 android:gravity="center"
                 ></TextView>
             <TextView
-                android:id="@+id/monday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="월"
                 android:gravity="center"
                 ></TextView>
             <TextView
                 android:id="@+id/tuesday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="화"
                 android:gravity="center"
                 ></TextView>
             <TextView
                 android:id="@+id/wednesday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="수"
                 android:gravity="center"
                 ></TextView>
             <TextView
                 android:id="@+id/thursday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="목"
                 android:gravity="center"
                 ></TextView>
             <TextView
                 android:id="@+id/friday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="금"
                 android:gravity="center"
                 ></TextView>
             <TextView
                 android:id="@+id/saturday"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:background="#00aaff"
                 android:text="토"
                 android:gravity="center"
@@ -132,7 +141,7 @@
                 android:horizontalSpacing="10dp"
                 android:numColumns="7"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="10dp" />
+                android:verticalSpacing="30dp" />
 
         </LinearLayout>
 
